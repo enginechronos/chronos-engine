@@ -4,7 +4,7 @@ Thanks for your interest in contributing to Chronos Engine.
 
 Chronos is an early-stage project focused on building persistent world memory for games.  
 We welcome contributions from developers interested in game AI, backend systems, and developer tools.
-
+ 
 ---
 
 ## Ways to Contribute
@@ -96,4 +96,3 @@ If you'd like to discuss ideas or ask questions, join the community:
 Discord: https://discord.gg/pY5qTNAWV6
 
 ---
-

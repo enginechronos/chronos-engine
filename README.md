@@ -30,6 +30,7 @@ This creates **living worlds where actions have long-term consequences.**
 
 ![Demo Scene](images/demo-scene.png)
 
+
 Watch the live demo:
 
 https://chronos-magic-engine-live.vercel.app/demo/0.1v
@@ -45,9 +46,8 @@ append events → run brain → fetch npc state
 Chronos uses a simple architecture designed for game engines.
 
 
-```
 Game → SDK → Chronos API → Event Memory → Brain → NPC State → Game
-```
+
 
 Core concepts:
 
@@ -100,7 +100,7 @@ Chronos.configure(
 Chronos.start()
 ```
 
-
+---
 
 ### 3 Send events
 
@@ -117,7 +117,7 @@ Chronos.brain_think(50)
 Chronos.get_npc_state("guard_1")
 ```
 
-
+---
 
 ## Example Project
 
@@ -164,8 +164,6 @@ https://chronos-magic-engine-live.vercel.app/docs
 
 ## Vibe Console
 
-![Vibe Console](images/vibe-console.png)
-
 Chronos includes a developer tool called the **Vibe Console**.
 
 This lets you:
@@ -175,7 +173,14 @@ This lets you:
 - inspect NPC state
 - debug memory
 
+### NPC Event Debugging
+![NPC Event](images/vibe-console-npcevent.png)
+
+### World Rule Editor
+![World Rule](images/vibe-console-worldrule.png)
+
 without changing your game code.
+
 
 ---
 
