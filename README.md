@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+![Chronos Engine](images/chronos-banner.png)
+
+>>>>>>> 9bd2790 (images updated)
 # Chronos Engine
 
 Persistent World Memory for Games.
@@ -26,6 +31,11 @@ This creates **living worlds where actions have long-term consequences.**
 
 ## Demo
 
+<<<<<<< HEAD
+=======
+![Demo Scene](images/demo-scene.png)
+
+>>>>>>> 9bd2790 (images updated)
 Watch the live demo:
 
 https://chronos-magic-engine-live.vercel.app/demo/0.1v
@@ -41,8 +51,14 @@ append events → run brain → fetch npc state
 Chronos uses a simple architecture designed for game engines.
 
 
+<<<<<<< HEAD
 Game → SDK → Chronos API → Event Memory → Brain → NPC State → Game
 
+=======
+```
+Game → SDK → Chronos API → Event Memory → Brain → NPC State → Game
+```
+>>>>>>> 9bd2790 (images updated)
 
 Core concepts:
 
@@ -83,7 +99,11 @@ Project Settings → Plugins
 
 ### 2 Configure Chronos
 
+<<<<<<< HEAD
 
+=======
+```
+>>>>>>> 9bd2790 (images updated)
 Chronos.configure(
 "https://chronos-engine.vercel.app
 ",
@@ -93,6 +113,7 @@ Chronos.configure(
 )
 
 Chronos.start()
+<<<<<<< HEAD
 
 
 ---
@@ -100,6 +121,15 @@ Chronos.start()
 ### 3 Send events
 
 
+=======
+```
+
+
+
+### 3 Send events
+
+```
+>>>>>>> 9bd2790 (images updated)
 Chronos.append_event(
 "player_1",
 "player_lied_to_guard",
@@ -110,9 +140,15 @@ true
 Chronos.brain_think(50)
 
 Chronos.get_npc_state("guard_1")
+<<<<<<< HEAD
 
 
 ---
+=======
+```
+
+
+>>>>>>> 9bd2790 (images updated)
 
 ## Example Project
 
@@ -159,6 +195,11 @@ https://chronos-magic-engine-live.vercel.app/docs
 
 ## Vibe Console
 
+<<<<<<< HEAD
+=======
+![Vibe Console](images/vibe-console.png)
+
+>>>>>>> 9bd2790 (images updated)
 Chronos includes a developer tool called the **Vibe Console**.
 
 This lets you:
