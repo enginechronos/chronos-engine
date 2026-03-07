@@ -173,11 +173,12 @@ This lets you:
 - inspect NPC state
 - debug memory
 
-### NPC Event Debugging
-![NPC Event](images/vibe-console-npcevent.png)
 
 ### World Rule Editor
 ![World Rule](images/vibe-console-worldrule.png)
+
+### NPC Event Debugging
+![NPC Event](images/vibe-console-npcevent.png)
 
 without changing your game code.
 
