@@ -6,7 +6,7 @@ func _ready() -> void:
 	Chronos.configure(
 		"https://chronos-magic-engine-live.vercel.app",                 # use site url here
 		"CHRONOS_ ",                                                    # keep your real api key here
-		"ghost_village_test",                                           # your world id
+		"ghost_village_test",                                           # your game world id
 		"guard_1"                                                       # your npc id
 	)
 
