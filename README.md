@@ -1,6 +1,16 @@
+# Chronos Engine
+
+Persistent World Memory for Games.
+
+Chronos Engine is a backend service that gives your game **persistent NPC memory, evolving world state, and AI-driven behavior**.
+
+Instead of NPCs forgetting everything between sessions, Chronos lets them **remember events and react consistently over time.**
+
+---
+
 ## What Chronos Does
 
-Chronos stores game events and derives NPC state using rules or AI.
+Chronos stores game events and derives NPC state using rules & AI.
 
 Example flow:
 
