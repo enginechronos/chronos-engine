@@ -10,12 +10,15 @@ var api_key := ""
 var _http := HTTPRequest.new()
 var _busy := false
 
-# queue items: { "method": int, "tag": String, "path": String, "body": String }
+# queue items:
+# { "method": int, "tag": String, "url": String, "body": String }
 var _q := []
+
 
 func _ready():
 	add_child(_http)
 	_http.connect("request_completed", self, "_on_done")
+
 
 func _headers_json() -> PoolStringArray:
 	var h := PoolStringArray()
@@ -23,6 +26,7 @@ func _headers_json() -> PoolStringArray:
 	if api_key.strip_edges() != "":
 		h.append("Authorization: Bearer " + api_key.strip_edges())
 	return h
+
 
 func _normalize_base_url(u: String) -> String:
 	var s = u.strip_edges()
@@ -34,6 +38,7 @@ func _normalize_base_url(u: String) -> String:
 		s = s.substr(0, s.length() - 1)
 	return s
 
+
 func _build_url(path: String) -> String:
 	var b = _normalize_base_url(base_url)
 	if b == "":
@@ -43,6 +48,7 @@ func _build_url(path: String) -> String:
 		p = "/" + p
 	return b + p
 
+
 func post_json(tag: String, path: String, body_dict: Dictionary) -> void:
 	var url = _build_url(path)
 	if url == "":
@@ -50,8 +56,14 @@ func post_json(tag: String, path: String, body_dict: Dictionary) -> void:
 		return
 
 	var body = ChronosTypes.json_print(body_dict)
-	_q.append({"method": HTTPClient.METHOD_POST, "tag": tag, "url": url, "body": body})
+	_q.append({
+		"method": HTTPClient.METHOD_POST,
+		"tag": tag,
+		"url": url,
+		"body": body
+	})
 	_pump()
+
 
 func get_json(tag: String, path: String) -> void:
 	var url = _build_url(path)
@@ -59,8 +71,14 @@ func get_json(tag: String, path: String) -> void:
 		emit_signal("request_err", tag, 0, "ChronosRESTClient: base_url missing. Call Chronos.configure() first.", {"base_url": base_url, "path": path})
 		return
 
-	_q.append({"method": HTTPClient.METHOD_GET, "tag": tag, "url": url, "body": ""})
+	_q.append({
+		"method": HTTPClient.METHOD_GET,
+		"tag": tag,
+		"url": url,
+		"body": ""
+	})
 	_pump()
+
 
 func _pump():
 	if _busy:
@@ -71,15 +89,17 @@ func _pump():
 	_busy = true
 	var item = _q.pop_front()
 
-	# Store tag on the HTTPRequest metadata so we know which response it belongs to
 	_http.set_meta("tag", item["tag"])
 
 	var err = _http.request(item["url"], _headers_json(), true, item["method"], item["body"])
 	if err != OK:
 		_busy = false
-		emit_signal("request_err", item["tag"], 0, "Local request error: " + str(err), {"local_err": err, "url": item["url"]})
-		# continue with next
+		emit_signal("request_err", item["tag"], 0, "Local request error: " + str(err), {
+			"local_err": err,
+			"url": item["url"]
+		})
 		_pump()
+
 
 func _on_done(_result, response_code, _headers, body):
 	var tag = ""

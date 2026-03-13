@@ -15,41 +15,84 @@ var _client := HTTPClient.new()
 var _running := false
 var _requested := false
 var _buf := ""
+
 var _reconnect_timer := Timer.new()
+var _reconnect_scheduled := false
+var _last_status := -999
+var _disconnect_logged := false
+
 
 func _ready():
 	_reconnect_timer.one_shot = true
 	add_child(_reconnect_timer)
-	_reconnect_timer.connect("timeout", self, "_force_reconnect")
+
+	if not _reconnect_timer.is_connected("timeout", self, "_force_reconnect"):
+		_reconnect_timer.connect("timeout", self, "_force_reconnect")
+
 	set_process(true)
 
+
 func start():
+	if _running:
+		emit_signal("stream_status", "SSE already running")
+		return
+
 	_running = true
 	_requested = false
 	_buf = ""
+	_reconnect_scheduled = false
+	_disconnect_logged = false
+	_last_status = -999
+
+	if _client:
+		_client.close()
+
 	_connect()
+
 
 func stop():
 	_running = false
 	_requested = false
 	_buf = ""
+	_reconnect_scheduled = false
+	_disconnect_logged = false
+
+	if _reconnect_timer:
+		_reconnect_timer.stop()
+
 	if _client:
 		_client.close()
+
 	emit_signal("stream_status", "SSE stopped")
 
+
 func _force_reconnect():
+	_reconnect_scheduled = false
+	_disconnect_logged = false
+
 	if not _running:
 		return
+
 	_requested = false
 	_buf = ""
+
 	if _client:
 		_client.close()
+
+	emit_signal("stream_status", "SSE reconnecting...")
 	_connect()
+
 
 func _schedule_reconnect():
 	if not _running:
 		return
+
+	if _reconnect_scheduled:
+		return
+
+	_reconnect_scheduled = true
 	_reconnect_timer.start(reconnect_seconds)
+
 
 func _connect():
 	if not _running:
@@ -63,9 +106,12 @@ func _connect():
 	_client.close()
 	_buf = ""
 	_requested = false
+	_disconnect_logged = false
 
-	var use_ssl = base_url.begins_with("https://")
-	var host = base_url.replace("https://", "").replace("http://", "")
+	var normalized = _normalize_base_url(base_url)
+	var use_ssl = normalized.begins_with("https://")
+
+	var host = normalized.replace("https://", "").replace("http://", "")
 	var slash = host.find("/")
 	if slash != -1:
 		host = host.substr(0, slash)
@@ -80,6 +126,7 @@ func _connect():
 
 	emit_signal("stream_status", "SSE connecting...")
 
+
 func _process(_delta):
 	if not _running:
 		return
@@ -87,7 +134,10 @@ func _process(_delta):
 	_client.poll()
 	var st = _client.get_status()
 
-	# When socket is connected, send HTTP request once
+	if st != _last_status:
+		_last_status = st
+
+	# Connected socket → send HTTP request once
 	if st == HTTPClient.STATUS_CONNECTED and not _requested:
 		var path = "/api/stream/world?world_id=" + ChronosTypes.url_encode(world_id)
 
@@ -103,20 +153,25 @@ func _process(_delta):
 			return
 
 		_requested = true
+		_reconnect_scheduled = false
+		_disconnect_logged = false
 		emit_signal("stream_status", "SSE connected ✅")
 
-	# Read body chunks
+	# Read SSE body
 	if st == HTTPClient.STATUS_BODY:
 		var chunk = _client.read_response_body_chunk()
 		if chunk.size() > 0:
 			_buf += chunk.get_string_from_utf8()
 			_consume_sse_buffer()
 
-	# Reconnect on failure
+	# Log disconnect only once per disconnect cycle
 	if st == HTTPClient.STATUS_DISCONNECTED or st == HTTPClient.STATUS_CANT_CONNECT or st == HTTPClient.STATUS_CONNECTION_ERROR:
 		if _running:
-			emit_signal("stream_status", "SSE disconnected, reconnecting...")
+			if not _disconnect_logged:
+				_disconnect_logged = true
+				emit_signal("stream_status", "SSE disconnected, reconnecting...")
 			_schedule_reconnect()
+
 
 func _consume_sse_buffer():
 	while true:
@@ -127,7 +182,6 @@ func _consume_sse_buffer():
 		var raw = _buf.substr(0, idx)
 		_buf = _buf.substr(idx + 2, _buf.length())
 
-		# Ignore keep-alive comments
 		if raw.begins_with(":"):
 			continue
 
@@ -137,10 +191,22 @@ func _consume_sse_buffer():
 
 		if evt.has("event") and evt.has("data") and typeof(evt["data"]) == TYPE_DICTIONARY:
 			var name = String(evt["event"])
+
 			if name == "world_event_appended":
 				emit_signal("world_event_appended", evt["data"])
 			elif name == "npc_state_updated":
 				emit_signal("npc_state_updated", evt["data"])
+			elif name == "stream_error":
+				emit_signal("stream_status", "SSE stream error")
+			elif name == "heartbeat":
+				pass
+			elif name == "hello":
+				pass
+			elif name == "replay":
+				pass
+			elif name == "npc_state_snapshot":
+				pass
+
 
 func _parse_sse_event(raw: String) -> Dictionary:
 	var out := {}
@@ -162,3 +228,14 @@ func _parse_sse_event(raw: String) -> Dictionary:
 		out["data"] = ChronosTypes.safe_json_parse(data_text)
 
 	return out
+
+
+func _normalize_base_url(u: String) -> String:
+	var s = u.strip_edges()
+	if s == "":
+		return ""
+	if not (s.begins_with("http://") or s.begins_with("https://")):
+		s = "https://" + s
+	while s.ends_with("/"):
+		s = s.substr(0, s.length() - 1)
+	return s

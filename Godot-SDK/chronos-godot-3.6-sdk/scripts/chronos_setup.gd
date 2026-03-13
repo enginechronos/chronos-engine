@@ -4,10 +4,10 @@ func _ready():
 	print("SETUP: running chronos_setup.gd")
 
 	Chronos.configure(
-		"https://chronos-magic-engine-live.vercel.app",                 # use site url here
-		"CHRONOS_ ",                                                    # keep your real api key here
-		"ghost_village_test",                                           # your game world id
-		"guard_1"                                                       # your npc id
+		"https://chronos-magic-engine-live.vercel.app",
+		"CHRONOS_xxxx",          # keep your real key here
+		"ghost_xxxx",
+		"guard_xxxxx"
 	)
 
 	Chronos.start()
