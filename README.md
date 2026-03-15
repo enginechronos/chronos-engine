@@ -189,8 +189,7 @@ Design your NPC behavior live while the game is running.
 ### NPC Event Debugging
 ![NPC Event](images/vibe-console-npcevent.png)
 
-without changing your game code.
-
+Without changing your game code, Chronos becomes a live AI behavior control system for your world.
 
 ---
 
