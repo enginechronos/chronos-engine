@@ -2,11 +2,16 @@
 
 # Chronos Engine
 
-Persistent World Memory for Games.
+Persistent World Memory Infrastructure for Games
 
-Chronos Engine is a backend service that gives your game **persistent NPC memory, evolving world state, and AI-driven behavior**.
+NPCs in most games forget everything.
+Chronos gives your game world memory.
 
-Instead of NPCs forgetting everything between sessions, Chronos lets them **remember events and react consistently over time.**
+Chronos Engine is a backend service that gives your game persistent NPC memory, evolving world state, and AI-driven behavior.
+
+Instead of NPCs resetting every session, Chronos stores world events and derives NPC behavior from that history.
+
+Player actions become part of the world’s memory, allowing characters to react consistently across play sessions.
 
 
 # Overview
@@ -31,6 +36,38 @@ This creates **living worlds where actions have long-term consequences.**
 
 ---
 
+## Architecture
+
+Chronos uses a simple architecture designed for game engines.
+
+
+Game Engine
+   ↓
+Chronos SDK
+   ↓
+Chronos API
+   ↓
+World Event Memory
+   ↓
+Chronos Brain
+   ↓
+NPC State
+   ↓
+Game reacts
+
+
+Chronos stores every significant action as a world event, then derives the current NPC state from that history.
+
+This architecture allows:
+
+persistent NPC memory
+
+consistent world behavior
+
+long-term player consequences
+
+---
+
 ## Demo
 
 ![Demo Scene](images/demo-scene.png)
@@ -40,29 +77,22 @@ Watch the live demo:
 
 https://chronos-magic-engine-live.vercel.app/demo/0.1v
 
-This demo shows:
+The demo shows:
 
-append events → run brain → fetch npc state
+Player performs an action
 
----
+Event is stored in Chronos
 
-## Architecture
+Chronos Brain processes memory
 
-Chronos uses a simple architecture designed for game engines.
+NPC state updates
 
+NPC behavior changes
 
-Game → SDK → Chronos API → Event Memory → Brain → NPC State → Game
-
-
-Core concepts:
-
-- **world_events** → append-only world history
-- **npc_states** → derived NPC behavior
-- **world_rules** → behavior rules
-- **brain** → AI or deterministic logic
-- **SSE stream** → real-time updates
+Restart the game and the NPC still remembers.
 
 ---
+
 
 ## Quick Start
 
@@ -107,7 +137,68 @@ Chronos.start()
 
 ---
 
-### 3 Send events
+Recommended SDK Flow (MVP)
+
+Your game only needs to send events and listen for NPC state updates.
+Chronos automatically runs the Brain and pushes real-time state updates.
+
+Important Call 1 — Listen for NPC state updates
+Chronos.npc_state_updated.connect(_on_npc_state_updated)
+
+```
+func _on_npc_state_updated(row):
+
+  var npc_id = row["npc_id"]
+  var state = row["state"]
+
+  print("NPC state updated:", npc_id, state)
+
+```  
+
+Your game reacts to NPC behavior changes here.
+
+Important Call 2 — Send gameplay events
+
+When something important happens in your game, send it to Chronos.
+
+```
+Chronos.append_event(
+  "player_1",
+  event_type,
+  payload,
+  true
+)
+
+```
+
+Example:
+
+Chronos.append_event(
+  "player_1",
+  "player_lied_to_guard",
+  {"context":"conversation"},
+  true
+)
+
+Chronos will automatically:
+
+store the event
+
+run the Brain
+
+update NPC state
+
+push the update back to the game
+
+Optional Call — Load saved NPC state on startup (recommended)
+
+If a scene loads after a restart, you may want to fetch the saved NPC state once.
+
+Chronos.get_npc_state("guard_1")
+
+This ensures the NPC immediately reflects the saved world state.
+
+---
 
 ```
 Chronos.append_event(
@@ -147,6 +238,16 @@ Append Event
 
 
 POST /api/events/append
+
+Example:
+
+{
+  "world_id": "village",
+  "entity_id": "player_1",
+  "event_type": "player_stole",
+  "payload": {"npc":"merchant"},
+  "significant": true
+}
 
 
 Run Brain
@@ -193,13 +294,51 @@ Without changing your game code, Chronos becomes a live AI behavior control syst
 
 ---
 
-## Contributing
+Engine Support
 
-We welcome contributions.
+Current:
 
-Please read:
+Godot 3.6 SDK
 
-CONTRIBUTING.md
+Planned:
+
+Unity SDK
+
+Unreal Engine SDK
+
+JavaScript SDK
+
+Chronos is designed to be engine agnostic.
+
+---
+
+Why Chronos Exists
+
+Most games reset NPC behavior every session.
+
+Players may steal, lie, attack, or help characters — but NPCs forget those actions once the game reloads.
+
+Chronos solves this by giving game worlds persistent memory.
+
+Every significant player action becomes part of the world’s history, allowing NPCs to react consistently over time.
+
+---
+
+Roadmap
+
+Upcoming work includes:
+
+improved runtime streaming
+
+Unity SDK
+
+multi-NPC world simulations
+
+deeper AI behavior systems
+
+advanced world orchestration
+
+Chronos aims to become the memory layer for living game worlds.
 
 ---
 
