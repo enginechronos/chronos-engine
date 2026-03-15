@@ -1,18 +1,3 @@
-Below is your **same README**, but cleaned and structured so it looks **much more professional on GitHub**:
-
-* proper headings
-* bullet points
-* arrows where useful
-* code blocks where formatting matters
-* consistent spacing
-* developer-friendly structure
-
-I **did NOT change your meaning**, only formatting.
-
-You can **copy-paste this directly**.
-
----
-
 ```markdown
 ![Chronos Engine](images/chronos-banner.png)
 
