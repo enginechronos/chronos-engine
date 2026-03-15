@@ -202,6 +202,10 @@ Chronos will automatically:
 ```gdscript
 Chronos.npc_state_updated.connect(_on_npc_state_updated)
 
+
+Example:
+
+```gdscript
 # Example handler for NPC updates 
 func _on_npc_state_updated(row):
 
@@ -209,6 +213,20 @@ func _on_npc_state_updated(row):
     var state = row["state"]
 
     print("NPC state updated:", npc_id, state)
+
+
+# Example in a real game:
+    func _on_npc_state_updated(row):
+
+    var state = row["state"]
+
+    if state["mood"] == "hostile":
+        guard_attack_player()
+
+    if state["mood"] == "friendly":
+        guard_allow_entry()
+
+
 ```
 
 Your game reacts to NPC behavior changes here.
