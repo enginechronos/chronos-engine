@@ -427,4 +427,3 @@ Discord:
 
 MIT License
 
-```
