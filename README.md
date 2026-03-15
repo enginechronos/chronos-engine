@@ -202,6 +202,9 @@ Chronos will automatically:
 ```gdscript
 Chronos.npc_state_updated.connect(_on_npc_state_updated)
 
+```
+
+```gdscript
 
 Example:
 
@@ -225,7 +228,6 @@ func _on_npc_state_updated(row):
 
     if state["mood"] == "friendly":
         guard_allow_entry()
-
 
 ```
 
