@@ -5,7 +5,7 @@ func _ready():
 
 	Chronos.configure(
 		"https://chronos-magic-engine-live.vercel.app",
-		"CHRONOS_xxxx",          # keep your real key here
+		"CHRONOS_xxxx",          # keep your real key here.
 		"ghost_xxxx",
 		"guard_xxxxx"
 	)

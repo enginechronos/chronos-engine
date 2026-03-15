@@ -1,6 +1,6 @@
 ```
 
-![Chronos Engine](./images/chronos-banner.png)
+![Chronos Engine](images/chronos-banner.png)
 
 # Chronos Engine
 
@@ -358,11 +358,11 @@ Design NPC behavior **live while the game is running.**
 
 ### World Rule Editor
 
-![World Rule](./images/vibe-console-worldrule.png)
+![World Rule](images/vibe-console-worldrule.png)
 
 ### NPC Event Debugging
 
-![NPC Event](./images/vibe-console-npcevent.png)
+![NPC Event](images/vibe-console-npcevent.png)
 
 Without changing your game code, Chronos becomes a **live AI behavior control system** for your world.
 
