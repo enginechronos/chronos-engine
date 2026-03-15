@@ -41,19 +41,21 @@ This creates **living worlds where actions have long-term consequences.**
 Chronos uses a simple architecture designed for game engines.
 
 
+```
 Game Engine
-   ↓
+    ↓
 Chronos SDK
-   ↓
+    ↓
 Chronos API
-   ↓
+    ↓
 World Event Memory
-   ↓
+    ↓
 Chronos Brain
-   ↓
+    ↓
 NPC State
-   ↓
+    ↓
 Game reacts
+```
 
 
 Chronos stores every significant action as a world event, then derives the current NPC state from that history.
