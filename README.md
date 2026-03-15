@@ -1,5 +1,3 @@
-```
-
 ![Chronos Engine](images/chronos-banner.png)
 
 # Chronos Engine
