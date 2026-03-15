@@ -178,6 +178,9 @@ This lets you:
 - inspect NPC state
 - debug memory
 
+You don’t need to change game code every time.
+Adjust behavior directly from the console and your NPCs will react immediately — no hardcoding or redeploy required.
+
 
 ### World Rule Editor
 ![World Rule](images/vibe-console-worldrule.png)
