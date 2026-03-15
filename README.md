@@ -182,7 +182,7 @@ Chronos.start()
 
 ---
 
-# Recommended SDK Flow (MVP)
+# Recommended SDK Flow (0.1v)
 
 Your game only needs to:
 
@@ -201,6 +201,8 @@ Chronos will automatically:
 
 ```gdscript
 Chronos.npc_state_updated.connect(_on_npc_state_updated)
+
+# Example handler for NPC updates 
 
 func _on_npc_state_updated(row):
 
