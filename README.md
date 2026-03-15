@@ -1,5 +1,6 @@
-```markdown
-![Chronos Engine](images/chronos-banner.png)
+```
+
+![Chronos Engine](./images/chronos-banner.png)
 
 # Chronos Engine
 
@@ -107,7 +108,7 @@ This architecture enables:
 
 # Demo
 
-![Demo Scene](images/demo-scene.png)
+![Demo Scene](./images/demo-scene.png)
 
 Watch the live demo:
 
@@ -281,7 +282,7 @@ Chronos.get_npc_state("guard_1")
 
 See the full working demo:
 
-[https://github.com/enginechronos/chronos-demo](https://github.com/enginechronos/chronos-demo)
+[https://github.com/enginechronos/chronos-demo]
 
 The demo shows:
 
@@ -332,7 +333,7 @@ GET /api/npc/state
 
 Full documentation:
 
-[https://chronos-magic-engine-live.vercel.app/docs](https://chronos-magic-engine-live.vercel.app/docs)
+[https://chronos-magic-engine-live.vercel.app/docs]
 
 ---
 
@@ -357,11 +358,11 @@ Design NPC behavior **live while the game is running.**
 
 ### World Rule Editor
 
-![World Rule](images/vibe-console-worldrule.png)
+![World Rule](./images/vibe-console-worldrule.png)
 
 ### NPC Event Debugging
 
-![NPC Event](images/vibe-console-npcevent.png)
+![NPC Event](./images/vibe-console-npcevent.png)
 
 Without changing your game code, Chronos becomes a **live AI behavior control system** for your world.
 
