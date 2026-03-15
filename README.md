@@ -8,6 +8,12 @@ Chronos Engine is a backend service that gives your game **persistent NPC memory
 
 Instead of NPCs forgetting everything between sessions, Chronos lets them **remember events and react consistently over time.**
 
+
+# Overview
+
+Chronos is like a "Magic Heart" for video games. Usually, characters in games are like actors who forget their lines as soon as you turn the game off. Chronos gives them a forever memory. If you trick a guard today, he will remember you and be suspicious when you log in tomorrow. You just plug Chronos into any game, and the world starts to learn, grow, and react to you just like a living person would.
+
+
 ---
 
 ## What Chronos Does
