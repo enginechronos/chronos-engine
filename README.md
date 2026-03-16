@@ -465,7 +465,7 @@ Have questions, feedback, or ideas?
 Join the community or reach out directly.
 
 ### Discord (Developer Community)
-[ https://discord.gg/pB9Z5tmG33 ]
+[ https://discord.gg/Pg6Txu8YyB ]
 
 ### Chronos Updates (Project X)
 [ https://x.com/EngineChronos ]
