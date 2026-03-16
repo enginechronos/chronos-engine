@@ -167,7 +167,22 @@ Project Settings → Plugins
 
 ---
 
-## 2 Configure Chronos
+## 2 Get your Chronos credentials
+
+Create a world in the Chronos Vibe Console and copy your credentials.
+
+![Chronos Vibe Console Scene](./images/console.png)
+
+You will need:
+
+API Key
+
+World ID
+
+NPC ID
+
+
+## 3 Configure Chronos
 
 ```gdscript
 Chronos.configure(
@@ -179,6 +194,9 @@ Chronos.configure(
 
 Chronos.start()
 ````
+
+![Example Setup Scene](./images/setup.png)
+
 
 ---
 
