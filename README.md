@@ -136,7 +136,7 @@ NPC still remembers
 
 # Quick Start
 
-## 1 Install SDK
+## 1. Install SDK
 
 Copy the Godot SDK into your project:
 
@@ -167,7 +167,7 @@ Project Settings → Plugins
 
 ---
 
-## 2 Get your Chronos credentials
+## 2. Get your Chronos credentials
 
 Create a world in the Chronos Vibe Console and copy your credentials.
 
@@ -183,7 +183,7 @@ World ID
 NPC ID
 
 
-## 3 Configure Chronos
+## 3. Configure Chronos
 
 ```gdscript
 Chronos.configure(
@@ -194,10 +194,11 @@ Chronos.configure(
 )
 
 Chronos.start()
-````
+
 Example Setup Scene.
 ![Example Setup Scene](./images/setup.png)
 
+````
 
 ---
 
