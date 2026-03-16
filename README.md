@@ -199,6 +199,8 @@ Chronos will automatically:
 
 ## Important Call 1 — Listen for NPC state updates
 
+When Chronos updates an NPC’s state, your game listens for the update and reacts to the new behavior.
+
 ```gdscript
 Chronos.npc_state_updated.connect(_on_npc_state_updated)
 ```
