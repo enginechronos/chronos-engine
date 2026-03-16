@@ -475,7 +475,6 @@ Join the community or reach out directly.
 
 
 
-Discord:
 
 
 
