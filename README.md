@@ -183,6 +183,8 @@ World ID
 NPC ID
 
 
+Use them in your configuration:
+
 ## 3. Configure Chronos
 
 ```gdscript
@@ -196,6 +198,9 @@ Chronos.configure(
 Chronos.start()
 
 ````
+Example Setup Scean.
+[Example Setup Scene](./images/setup.png)
+
 
 ---
 
