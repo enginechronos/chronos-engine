@@ -175,6 +175,7 @@ Create a world in the Chronos Vibe Console and copy your credentials.
 
 You will need:
 
+
 API Key
 
 World ID
@@ -194,7 +195,7 @@ Chronos.configure(
 
 Chronos.start()
 ````
-
+Example Setup Scene:
 ![Example Setup Scene](./images/setup.png)
 
 
