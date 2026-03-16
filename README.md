@@ -412,7 +412,7 @@ Without changing your game code, Chronos becomes a **live AI behavior control sy
 
 ### Current
 
-* Godot 3.6 SDK
+* Godot 3.6 SDK , Godot 4.5 SDK
 
 ### Planned
 
