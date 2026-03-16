@@ -197,7 +197,7 @@ Chronos.configure(
 
 Chronos.start()
 
-````
+
 Example Setup Scean.
 ![Example Setup Scene](./images/setup.png)
 
