@@ -171,6 +171,8 @@ Project Settings → Plugins
 
 Create a world in the Chronos Vibe Console and copy your credentials.
 
+Site Link: https://chronos-magic-engine-live.vercel.app/
+
 ![Chronos Vibe Console Scene](./images/console.png)
 
 You will need:
@@ -457,9 +459,25 @@ Chronos aims to become the **memory layer for living game worlds.**
 
 # Community
 
+Building with Chronos?  
+Have questions, feedback, or ideas?
+
+Join the community or reach out directly.
+
+### Discord (Developer Community)
+[ https://discord.gg/pY5qTNAWV6 ]
+
+### Chronos Updates (Project X)
+[ https://x.com/EngineChronos ]
+
+### Founder Contact
+[ https://x.com/mr_manasmishra ]
+
+
+
 Discord:
 
-[https://discord.gg/pY5qTNAWV6]
+
 
 ---
 
