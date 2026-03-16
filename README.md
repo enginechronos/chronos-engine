@@ -2,7 +2,7 @@
 
 # Chronos Engine
 
-**Persistent World Memory Infrastructure for Games**
+**Persistent World Memory for Games**
 
 NPCs in most games forget everything.  
 Chronos gives your game world **memory**.
