@@ -286,17 +286,6 @@ Every significant player action becomes part of the world's history, allowing NP
 - Product docs: https://chronos-magic-engine-live.vercel.app/docs
 - Live demo: https://chronos-magic-engine-live.vercel.app/demo/0.1v
 
-# Roadmap
-
-Upcoming work includes:
-
-* improved runtime streaming
-* Unity SDK
-* multi-NPC world simulations
-* deeper AI behavior systems
-* advanced world orchestration
-
-Chronos aims to become the **memory layer for living game worlds.**
 
 ---
 
