@@ -17,9 +17,11 @@ Instead of NPCs resetting every session, Chronos stores **world events** and der
 
 Player actions become part of the world's memory, allowing characters to react consistently across play sessions.
 
+No more hardcoded NPC logic. Chronos turns player actions into persistent world memory.
+
 ---
 
-# Overview
+## Overview
 
 Chronos is like a **Magic Heart and a Living Mind** for video games.
 
@@ -42,7 +44,7 @@ Just plug Chronos into your game and the world begins to **learn, grow, and reac
 
 ---
 
-# What Chronos Does
+## What Chronos Does
 
 Chronos stores **game events** and derives **NPC state** using rules and AI.
 
@@ -134,190 +136,6 @@ NPC still remembers
 
 ---
 
-# Quick Start
-
-## 1. Install SDK
-
-Copy the Godot SDK into your project:
-
-```
-
-res://addons/chronos/
-
-```
-
-Files:
-
-```
-
-Chronos.gd
-ChronosRESTClient.gd
-ChronosSSEClient.gd
-ChronosTypes.gd
-
-```
-
-Enable the plugin in:
-
-```
-
-Project Settings → Plugins
-
-````
-
----
-
-## 2. Get your Chronos credentials
-
-Create a world in the Chronos Vibe Console and copy your credentials.
-
-Site Link: https://chronos-magic-engine-live.vercel.app/
-
-![Chronos Vibe Console Scene](./images/console.png)
-
-You will need:
-
-
-API Key
-
-World ID
-
-NPC ID
-
-
-Use them in your configuration:
-
-## 3. Configure Chronos
-
-```gdscript
-Chronos.configure(
-"https://chronos-engine.vercel.app",
-"CHRONOS_API_KEY",
-"your_world_id",
-"npc_id"
-)
-
-Chronos.start()
-```
-
-Example Setup Scean.
-
-![Example Setup Scene](./images/setup.png)
-
-
----
-
-# Recommended SDK Flow (0.1v)
-
-Your game only needs to:
-
-* send gameplay events
-* listen for NPC state updates
-
-Chronos will automatically:
-
-* run the Brain
-* update NPC state
-* push real-time updates back to the game
-
----
-
-## Important Call 1 — Listen for NPC state updates
-
-When Chronos updates an NPC’s state, your game listens for the update and reacts to the new behavior.
-
-```gdscript
-Chronos.npc_state_updated.connect(_on_npc_state_updated)
-```
-
-Example:
-
-```gdscript
-func _on_npc_state_updated(row):
-    var npc_id = row["npc_id"]
-    var state = row["state"]
-
-    print("NPC state updated:", npc_id, state)
-```
-
-Real game example:
-
-```gdscript
-func _on_npc_state_updated(row):
-    var state = row["state"]
-
-    if state["mood"] == "hostile":
-        guard_attack_player()
-
-    if state["mood"] == "friendly":
-        guard_allow_entry()
-```
-
-Your game reacts to NPC behavior changes here.
-
-
-## Important Call 2 — Send gameplay events
-
-When something important happens in your game, send it to Chronos.
-
-```gdscript
-Chronos.append_event(
-  "player_1",
-  event_type,
-  payload,
-  true
-)
-```
-
-Example:
-
-```gdscript
-Chronos.append_event(
-  "player_1",
-  "player_lied_to_guard",
-  {"context":"conversation"},
-  true
-)
-```
-
-Chronos will automatically:
-
-* store the event
-* run the Brain
-* update NPC state
-* push the update back to the game
-
----
-
-## Optional Call — Load NPC state on startup
-
-If a scene loads after a restart, fetch the saved NPC state once.
-
-```gdscript
-Chronos.get_npc_state("guard_1")
-```
-
-This ensures the NPC immediately reflects the saved world state.
-
----
-
-## Manual Debug Calls
-
-```gdscript
-Chronos.append_event(
-"player_1",
-"player_lied_to_guard",
-{"context":"conversation"},
-true
-)
-
-Chronos.brain_think(50)
-
-Chronos.get_npc_state("guard_1")
-```
-
----
-
 # Example Project
 
 See the full working demo:
@@ -330,6 +148,24 @@ The demo shows:
 * gameplay events
 * NPC mood changes
 * persistent world memory
+
+---
+
+## SDK Repositories
+
+Chronos SDKs are maintained in separate repositories.
+
+Start here if you want to integrate Chronos into your game.
+
+Current:
+- Godot SDK — https://github.com/enginechronos/chronos-godot-sdk
+
+Upcoming:
+- Unity SDK — coming soon
+- Unreal Engine SDK — coming soon
+- Roblox Studio SDK — coming soon
+
+Each SDK repo contains engine-specific installation steps, setup guides, examples, and troubleshooting.
 
 ---
 
@@ -408,13 +244,15 @@ Without changing your game code, Chronos becomes a **live AI behavior control sy
 
 ---
 
+
+
 # Engine Support
 
 ### Current
 
 * Godot 3.6 SDK , Godot 4.5 SDK
 
-### Planned
+### Comming
 
 * Unity SDK
 * Unreal Engine SDK
@@ -442,6 +280,11 @@ Chronos solves this by giving game worlds **persistent memory**.
 Every significant player action becomes part of the world's history, allowing NPCs to react consistently over time.
 
 ---
+
+## Docs
+
+- Product docs: https://chronos-magic-engine-live.vercel.app/docs
+- Live demo: https://chronos-magic-engine-live.vercel.app/demo/0.1v
 
 # Roadmap
 
@@ -473,14 +316,17 @@ Join the community or reach out directly.
 ### Founder Contact
 [ https://x.com/mr_manasmishra ]
 
-
-
-
-
-
 ---
 
 # License
 
 MIT License
+
+
+
+
+
+
+
+
 
